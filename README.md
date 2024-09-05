@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # github2s3
-=======
+
 
 # 📦 Backup Automation Using Restic and Docker
 
