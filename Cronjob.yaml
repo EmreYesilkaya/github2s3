@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: docker-cronjob
+spec:
+  schedule: "0 */12 * * *"  # Her 12 saatte bir çalışacak cron ifadesi
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: docker-job
+            image: <DOCKER_HUB_IMAGE_URL>  # Docker Hub'daki image URL'si (örn: username/repository:tag)
+            envFrom:
+              - secretRef:
+                  name: docker-env-secrets  # secrets.env dosyanızı burada tanımlayın
+            command: ["/bin/sh", "-c", "bash /mnt/data/backup.sh && echo Job Completed"]
+          restartPolicy: OnFailure
